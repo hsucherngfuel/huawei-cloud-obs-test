@@ -1,0 +1,20 @@
+{
+  "name": "huawei-cloud",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "esdk-obs-nodejs": "^3.24.3",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1"
+  }
+}
