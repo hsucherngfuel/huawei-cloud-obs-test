@@ -13,7 +13,7 @@ export const makePutObject = (obsClient) => {
     const debug = process.env.DEBUG === 'true';
 
     if (debug) {
-      console.dir('req: ', req);
+      console.log('req: ', JSON.stringify(req));
     }
 
     const { objectKey } = req.params;
@@ -27,7 +27,7 @@ export const makePutObject = (obsClient) => {
     };
 
     if (debug) {
-      console.dir('obsPutRequest: ', obsPutRequest);
+      console.log('obsPutRequest: ', JSON.stringify(obsPutRequest));
     }
 
     const obsPutResponse = await obsClient.putObject(obsPutRequest);
@@ -46,7 +46,7 @@ export const makeGetObject = (obsClient) => {
     const debug = process.env.DEBUG === 'true';
 
     if (debug) {
-      console.dir('req: ', req);
+      console.log('req: ', JSON.stringify(req));
     }
 
     const { objectKey } = req.params;
@@ -60,7 +60,7 @@ export const makeGetObject = (obsClient) => {
     };
 
     if (debug) {
-      console.dir('obsGetRequest: ', obsGetRequest);
+      console.log('obsGetRequest: ', JSON.stringify(obsGetRequest));
     }
 
     const obsGetResponse = obsClient.createSignedUrlSync(obsGetRequest);
