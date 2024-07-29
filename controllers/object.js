@@ -55,7 +55,7 @@ export const makeGetObject = (obsClient) => {
     const { expiresInSeconds } = req.body;
 
     const obsGetRequest = {
-      Method: 'POST',
+      Method: 'GET',
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
       Key: objectKey,
       Expires: expiresInSeconds
