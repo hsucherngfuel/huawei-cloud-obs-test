@@ -33,6 +33,10 @@ export const makePutObject = (obsClient) => {
 
     const obsPutResponse = await obsClient.putObject(obsPutRequest);
 
+    if (debug) {
+      console.log('obsPutResponse: ', JSON.stringify(obsPutResponse));
+    }
+
     res.status(200)
       .json(obsPutResponse);
   };
@@ -66,6 +70,10 @@ export const makeGetObject = (obsClient) => {
     }
 
     const obsGetResponse = obsClient.createSignedUrlSync(obsGetRequest);
+
+    if (debug) {
+      console.log('obsGetResponse: ', JSON.stringify(obsGetResponse));
+    }
 
     res.status(200)
       .json(obsGetResponse);
