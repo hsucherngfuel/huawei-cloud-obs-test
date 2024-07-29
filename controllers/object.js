@@ -16,10 +16,13 @@ export const makePutObject = (obsClient) => {
       console.dir('req: ', req);
     }
 
+    const { objectKey } = req.params;
+    const { file } = req.body;
+
     const obsPutRequest = {
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
-      Key: req.params.objectKey,
-      ContentType: req.file.mimetype,
+      Key: objectKey,
+      ContentType: file.mimetype,
       Body: Readable.from(file.buffer)
     };
 
@@ -46,11 +49,14 @@ export const makeGetObject = (obsClient) => {
       console.dir('req: ', req);
     }
 
+    const { objectKey } = req.params;
+    const { expiresInSeconds } = req.body;
+
     const obsGetRequest = {
       Method: 'POST',
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
-      Key: req.params.objectKey,
-      Expires: req.expiresInSeconds
+      Key: objectKey,
+      Expires: expiresInSeconds
     };
 
     if (debug) {
