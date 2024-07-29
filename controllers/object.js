@@ -13,7 +13,8 @@ export const makePutObject = (obsClient) => {
     const debug = process.env.DEBUG === 'true';
 
     if (debug) {
-      console.log('req: ', JSON.stringify(req));
+      console.log('req.params: ', JSON.stringify(req.params));
+      console.log('req.body: ', JSON.stringify(req.body));
     }
 
     const { objectKey } = req.params;
@@ -46,7 +47,8 @@ export const makeGetObject = (obsClient) => {
     const debug = process.env.DEBUG === 'true';
 
     if (debug) {
-      console.log('req: ', JSON.stringify(req));
+      console.log('req.params: ', JSON.stringify(req.params));
+      console.log('req.body: ', JSON.stringify(req.body));
     }
 
     const { objectKey } = req.params;
