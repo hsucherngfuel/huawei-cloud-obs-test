@@ -20,7 +20,9 @@ const obsClient = new ObsClient({
   Pre-Middlewares
 =============================================================================*/
 
-app.use(express.json());
+app.use(express.json({
+  limit: '5mb'
+}));
 
 /*=============================================================================
   Routes
