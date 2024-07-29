@@ -17,6 +17,11 @@ export const makePutObject = (obsClient) => {
       Body: Readable.from(file.buffer)
     };
 
+    if (process.env.DEBUG === 'true') {
+      console.dir('req: ', req);
+      console.dir('obsPutRequest: ', obsPutRequest);
+    }
+
     const obsPutResponse = await obsClient.putObject(obsPutRequest);
 
     res.status(200)
@@ -36,6 +41,11 @@ export const makeGetObject = (obsClient) => {
       Key: req.params.objectKey,
       Expires: req.expiresInSeconds
     };
+
+    if (process.env.DEBUG === 'true') {
+      console.dir('req: ', req);
+      console.dir('obsGetRequest: ', obsGetRequest);
+    }
 
     const obsGetResponse = obsClient.createSignedUrlSync(obsGetRequest);
 
