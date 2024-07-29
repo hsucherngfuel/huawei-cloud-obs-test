@@ -10,6 +10,12 @@ import { Readable } from 'node:stream';
 
 export const makePutObject = (obsClient) => {
   return async (req, res) => {
+    const debug = process.env.DEBUG === 'true';
+
+    if (debug) {
+      console.dir('req: ', req);
+    }
+
     const obsPutRequest = {
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
       Key: req.params.objectKey,
@@ -17,8 +23,7 @@ export const makePutObject = (obsClient) => {
       Body: Readable.from(file.buffer)
     };
 
-    if (process.env.DEBUG === 'true') {
-      console.dir('req: ', req);
+    if (debug) {
       console.dir('obsPutRequest: ', obsPutRequest);
     }
 
@@ -35,6 +40,12 @@ export const makePutObject = (obsClient) => {
 
 export const makeGetObject = (obsClient) => {
   return async (req, res) => {
+    const debug = process.env.DEBUG === 'true';
+
+    if (debug) {
+      console.dir('req: ', req);
+    }
+
     const obsGetRequest = {
       Method: 'POST',
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
@@ -42,8 +53,7 @@ export const makeGetObject = (obsClient) => {
       Expires: req.expiresInSeconds
     };
 
-    if (process.env.DEBUG === 'true') {
-      console.dir('req: ', req);
+    if (debug) {
       console.dir('obsGetRequest: ', obsGetRequest);
     }
 
