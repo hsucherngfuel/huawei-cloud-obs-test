@@ -8,7 +8,7 @@ export const makeObjectRouter = (obsClient) => {
   const getObject = makeGetObject(obsClient);
 
   router.put('/object/:objectKey', putObject);
-  router.post('/object/:objectKey', getObject);
+  router.get('/object/:objectKey', getObject);
   router.post('/object/signedurl/:objectKey', getSignedUrl);
 
   return router;
