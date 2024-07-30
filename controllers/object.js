@@ -59,7 +59,7 @@ export const makeGetObject = (obsClient) => {
       console.log('obsGetObjectRequest: ', JSON.stringify(obsGetObjectRequest));
     }
 
-    const obsGetObjectResponse = obsClient.getObject(obsGetObjectRequest);
+    const obsGetObjectResponse = await obsClient.getObject(obsGetObjectRequest);
 
     if (debug) {
       console.log('obsGetObjectResponse: ', JSON.stringify(obsGetObjectResponse));
