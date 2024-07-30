@@ -14,7 +14,7 @@ export const makePutObject = (obsClient) => {
     const { objectKey } = req.params;
     const { file } = req.body;
 
-    const obsPutRequest = {
+    const obsPutObjectRequest = {
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
       Key: objectKey,
       ContentType: file.mimetype,
@@ -22,17 +22,17 @@ export const makePutObject = (obsClient) => {
     };
 
     if (debug) {
-      console.log('obsPutRequest: ', JSON.stringify(obsPutRequest));
+      console.log('obsPutObjectRequest: ', JSON.stringify(obsPutObjectRequest));
     }
 
-    const obsPutResponse = await obsClient.putObject(obsPutRequest);
+    const obsPutObjectResponse = await obsClient.putObject(obsPutObjectRequest);
 
     if (debug) {
-      console.log('obsPutResponse: ', JSON.stringify(obsPutResponse));
+      console.log('obsPutObjectResponse: ', JSON.stringify(obsPutObjectResponse));
     }
 
     res.status(200)
-      .json(obsPutResponse);
+      .json(obsPutObjectResponse);
   };
 };
 
@@ -46,13 +46,47 @@ export const makeGetObject = (obsClient) => {
 
     if (debug) {
       console.log('req.params: ', JSON.stringify(req.params));
+    }
+
+    const { objectKey } = req.params;
+
+    let obsGetObjectRequest = {
+      Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
+      Key: objectKey,
+    };
+
+    if (debug) {
+      console.log('obsGetObjectRequest: ', JSON.stringify(obsGetObjectRequest));
+    }
+
+    const obsGetObjectResponse = obsClient.getObject(obsGetObjectRequest);
+
+    if (debug) {
+      console.log('obsGetObjectResponse: ', JSON.stringify(obsGetObjectResponse));
+    }
+
+    res.status(200)
+      .json(obsGetObjectResponse);
+  };
+};
+
+
+/*=============================================================================
+  Get Signed URL
+=============================================================================*/
+
+export const makeGetSignedUrl = (obsClient) => {
+  return async (req, res) => {
+    const debug = process.env.DEBUG === 'true';
+
+    if (debug) {
+      console.log('req.params: ', JSON.stringify(req.params));
       console.log('req.body: ', JSON.stringify(req.body));
     }
 
     const { objectKey } = req.params;
-    const { expiresInSeconds } = req.body;
-
-    const obsGetRequest = {
+    const { expiresInSeconds, saveAsFile } = req.body;
+    const obsSignedUrlRequest = {
       Method: 'GET',
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
       Key: objectKey,
@@ -60,16 +94,16 @@ export const makeGetObject = (obsClient) => {
     };
 
     if (debug) {
-      console.log('obsGetRequest: ', JSON.stringify(obsGetRequest));
+      console.log('obsSignedUrlRequest: ', JSON.stringify(obsSignedUrlRequest));
     }
 
-    const obsGetResponse = obsClient.createSignedUrlSync(obsGetRequest);
+    const obsGetSignedUrlResponse = obsClient.createSignedUrlSync(obsSignedUrlRequest);
 
     if (debug) {
-      console.log('obsGetResponse: ', JSON.stringify(obsGetResponse));
+      console.log('obsGetSignedUrlResponse: ', JSON.stringify(obsGetSignedUrlResponse));
     }
 
     res.status(200)
-      .json(obsGetResponse);
+      .json(obsGetSignedUrlResponse);
   };
 };
