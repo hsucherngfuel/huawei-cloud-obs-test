@@ -18,7 +18,7 @@ export const makePutObject = (obsClient) => {
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
       Key: objectKey,
       ContentType: file.mimetype,
-      Body: file.buffer
+      Body: Buffer.from(file.buffer, 'base64')
     };
 
     if (debug) {
