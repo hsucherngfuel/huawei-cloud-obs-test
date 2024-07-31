@@ -1,3 +1,5 @@
+import { Readable } from 'node:stream';
+
 /*=============================================================================
   Put Object
 =============================================================================*/
@@ -18,7 +20,7 @@ export const makePutObject = (obsClient) => {
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
       Key: objectKey,
       ContentType: file.mimetype,
-      Body: Buffer.from(file.buffer, 'base64')
+      Body: Readable.from(Buffer.from(file.buffer, 'base64'))
     };
 
     if (debug) {
