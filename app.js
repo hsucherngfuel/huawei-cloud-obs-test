@@ -13,8 +13,19 @@ const app = express();
 const obsClient = new ObsClient({
   access_key_id: process.env.HUAWEI_OBS_ACCESS_KEY_ID,
   secret_access_key: process.env.HUAWEI_OBS_SECRET_ACCESS_KEY,
-  server: process.env.HUAWEI_OBS_SERVER
+  server: process.env.HUAWEI_OBS_SERVER,
 });
+
+obsClient.setBucketCors({
+  Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
+  CorsRules: [
+    {
+      ID: 'corsrule1',
+      AllowedMethod: ['PUT', 'GET', 'POST'],
+      AllowedOrigin: [process.env.POC_ORIGIN]
+    }
+  ]
+})
 
 /*=============================================================================
   Pre-Middlewares
