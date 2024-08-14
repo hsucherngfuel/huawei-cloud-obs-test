@@ -92,7 +92,10 @@ export const makeGetSignedUrl = (obsClient) => {
       Method: 'GET',
       Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
       Key: objectKey,
-      Expires: expiresInSeconds
+      Expires: expiresInSeconds,
+      Headers: {
+        'Access-Control-Allow-Origin': process.env.POC_ORIGIN
+      }
     };
 
     if (debug) {
