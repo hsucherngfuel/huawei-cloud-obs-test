@@ -63,6 +63,8 @@ export const makeGetObject = (obsClient) => {
 
     const obsGetObjectResponse = await obsClient.getObject(obsGetObjectRequest);
 
+    obsGetObjectResponse.InterfaceResult.Content = Buffer.from(obsGetObjectResponse.InterfaceResult.Content).toString('base64url');
+
     if (debug) {
       console.log('obsGetObjectResponse: ', JSON.stringify(obsGetObjectResponse));
     }
