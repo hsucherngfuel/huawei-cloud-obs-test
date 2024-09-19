@@ -15,6 +15,7 @@ const obsClient = new ObsClient({
   secret_access_key: process.env.HUAWEI_OBS_SECRET_ACCESS_KEY,
   server: process.env.HUAWEI_OBS_SERVER,
 });
+const useStayAliveInterval = process.env.STAY_ALIVE_INTERVAL === 'true';
 
 obsClient.setBucketCors({
   Bucket: process.env.HUAWEI_OBS_BUCKET_NAME,
@@ -74,3 +75,9 @@ const start = async () => {
 };
 
 start();
+
+if (useStayAliveInterval) {
+  setInterval(() => {
+    console.log('Staying alive');
+  }, 1000 * 60 * 2)
+}
